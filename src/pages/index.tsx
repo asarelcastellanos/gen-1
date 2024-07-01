@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
-      fetch('/api/calendar')
+      fetch('/api/calendar_events')
         .then((response) => response.json())
         .then((data) => {
           if (data.events) {
@@ -29,6 +29,21 @@ export default function Home() {
           console.error("Failed to fetch events:", error);
         });
     }
+    // if (session) {
+    //   fetch('/api/calendar_list')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       if (data.calendars) {
+    //         console.log(data.calendars);
+    //         setEvents(data.calendars);
+    //       } else {
+    //         console.error("No calendars found in the response");
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.error("Failed to fetch calendars:", error);
+    //     });
+    // }
   }, [session]);
 
   console.log(session)

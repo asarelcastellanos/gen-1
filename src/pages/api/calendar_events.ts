@@ -11,11 +11,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { accessToken } = session;
-  const calendar = google.calendar({ version: 'v3', auth: accessToken });
+  const oauth2Client =  new google.auth.OAuth2();
+  oauth2Client.setCredentials({ access_token: accessToken })
+  const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
   try {
     const events = await calendar.events.list({
-      calendarId: 'primary',
+      calendarId: '9cb5fc5c0d6889291c872d7d183fd1ffd5bd024c57eb1c759188499f79f9caea@group.calendar.google.com',
       timeMin: new Date().toISOString(),
       maxResults: 10,
       singleEvents: true,
